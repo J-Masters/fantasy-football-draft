@@ -1,5 +1,6 @@
 package com.fantasydraft.justin.entity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +19,8 @@ public class Draft {
 	
 	private Integer currentPick;
 	
+	private Integer currentTeam;
+	
 	private String draftType;
 	
 	private LinkedList<String> draftTypeOptions;
@@ -26,9 +29,12 @@ public class Draft {
 	
 	private List<String> draftTeams;
 	
+	private List<Player> draftedPlayers;
+	
 	public Draft() {
 		
 		draftTeams = new LinkedList<>();
+		draftedPlayers = new ArrayList<>();
 		
 		draftTypeOptions = new LinkedList<String>();
 		draftTypeOptions.add("Linear");
@@ -62,6 +68,17 @@ public class Draft {
 	public void incrementCurrentPick() {
 		currentPick++;
 	}
+	
+	public Integer getCurrentTeam() {
+		currentTeam = (currentPick - 1) % numTeams;
+		int round = (currentPick - 1) / numTeams + 1;
+		
+		if (!fwdRounds.contains(round)) {
+			currentTeam = 7 - currentTeam;
+		}
+		
+		return currentTeam;
+	}
 		
 	public String getDraftType() {
 		return draftType;
@@ -91,4 +108,20 @@ public class Draft {
 		draftTeams.clear();
 	}
 	
+	public void setDraftedPlayers(List<Player> draftedPlayers) {
+		this.draftedPlayers = draftedPlayers;
+	}
+	
+	public void addDraftedPlayer() {
+		//todo: hibernate in controller will add pick to player then this will add player to draftedPlayers
+		//todo: add this when javascript added, setDraftedPlayer will load whenever page is reloaded
+	}
+	
+	public void clearDraftedPlayers() {
+		draftedPlayers.clear();
+	}
+	
+	public List<Player> getDraftedPlayers() {
+		return draftedPlayers;
+	}
 }

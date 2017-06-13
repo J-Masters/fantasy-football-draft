@@ -15,7 +15,7 @@
 
 <body>
 
-<form:form action="submitTeams" modelAttribute="draft" method="POST">
+<form:form action="draft" modelAttribute="draft" method="POST">
 
   <p>Enter teams in order of first round pick.</p>
   <tr>
