@@ -58,8 +58,13 @@ public class DraftController {
 		}
 	}
 	
-	@PostMapping("/draft")
+	@RequestMapping("/draft")
 	public String submitTeams(@ModelAttribute("draft") Draft draft) {
+		
+		draft.setDraftedPlayers(playerService.getDraftedPlayers());
+		
+		// for debugging
+		System.out.println(draft.getDraftedPlayers());
 		
 		return "draft-page";
 	}

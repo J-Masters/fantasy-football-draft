@@ -21,7 +21,7 @@ public class PlayerDAOImpl implements PlayerDAO {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Query<Player> query = currentSession.createQuery("from Players where pick is not null", Player.class);
+		Query<Player> query = currentSession.createQuery("from Player where pick is not null", Player.class);
 		
 		List<Player> draftedPlayers = query.getResultList();
 		

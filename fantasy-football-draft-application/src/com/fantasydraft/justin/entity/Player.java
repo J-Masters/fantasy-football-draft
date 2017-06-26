@@ -78,7 +78,7 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return "Player [playerName=" + playerName + ", position=" + position + ", nflTeam=" + nflTeam + ", fantasyTeam="
+		return "Player [playerName:" + playerName + ", position:" + position + ", nflTeam=" + nflTeam + ", fantasyTeam="
 				+ fantasyTeam + ", pick=" + pick + "]";
 	}
 }

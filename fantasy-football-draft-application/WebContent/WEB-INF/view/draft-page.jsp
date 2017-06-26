@@ -37,13 +37,29 @@
 
       </c:choose>
       
-      <!-- <c:set var="pickId" value="${'pick' += currentPick}" /> -->
-      <td class="pickBox"><c:out value="${currentPick}" /></td>
-
+      <c:set var="pickUsed" value="${false}" />
+      <c:forEach var="player" items="${draft.draftedPlayers}">
+        <c:if test="${player.pick == currentPick}">
+          <td class="pickBox">
+            <ul>
+              <li><c:out value="${player.pick}" /></li>
+              <li><c:out value="${player.playerName}" /></li>
+              <li><c:out value="${player.position}" /></li>
+              <li><c:out value="${player.nflTeam}" /></li>
+            </ul>
+          </td>
+          <c:set var="pickUsed" value="${true}" />
+        </c:if>
+      </c:forEach>
+      <c:if test="${pickUsed == false}">
+        <td class="pickBox"><c:out value="${currentPick}" /></td>
+      </c:if> 
+      
       </c:forEach>
       </tr>
       <br>
     </c:forEach>
   </table>
+  
 </body>
 </html>
