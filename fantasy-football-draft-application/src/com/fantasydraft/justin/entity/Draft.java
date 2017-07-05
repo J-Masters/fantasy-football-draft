@@ -31,10 +31,17 @@ public class Draft {
 	
 	private List<Player> draftedPlayers;
 	
+	private List<Player> availablePlayers;
+	
+	private String selectedPlayerName;
+	
+	private Player selectedPlayer;
+	
 	public Draft() {
 		
 		draftTeams = new LinkedList<>();
 		draftedPlayers = new ArrayList<>();
+		selectedPlayer = new Player();
 		
 		draftTypeOptions = new LinkedList<String>();
 		draftTypeOptions.add("Linear");
@@ -63,10 +70,6 @@ public class Draft {
 	
 	public void setCurrentPick(Integer currentPick) {
 		this.currentPick = currentPick;
-	}
-	
-	public void incrementCurrentPick() {
-		currentPick++;
 	}
 	
 	public Integer getCurrentTeam() {
@@ -113,15 +116,43 @@ public class Draft {
 	}
 	
 	public void addDraftedPlayer() {
-		//todo: hibernate in controller will add pick to player then this will add player to draftedPlayers
+		//todo: hibernate in controller will add pick and team to player then this will add player to draftedPlayers
 		//todo: add this when javascript added, setDraftedPlayer will load whenever page is reloaded
+	}
+	
+	public List<Player> getDraftedPlayers() {
+		return draftedPlayers;
 	}
 	
 	public void clearDraftedPlayers() {
 		draftedPlayers.clear();
 	}
 	
-	public List<Player> getDraftedPlayers() {
-		return draftedPlayers;
+	public void setAvailablePlayers(List<Player> availablePlayers) {
+		this.availablePlayers = availablePlayers;
+	}
+	
+	public List<Player> getAvailablePlayers() {
+		return availablePlayers;
+	}
+	
+	public void clearAvailablePlayers() {
+		availablePlayers.clear();
+	}
+	
+	public String getSelectedPlayerName() {
+		return selectedPlayerName;
+	}
+	
+	public void setSelectedPlayerName(String selectedPlayerName) {
+		this.selectedPlayerName = selectedPlayerName;
+	}
+	
+	public Player getSelectedPlayer() {
+		return selectedPlayer;
+	}
+	
+	public void setSelectedPlayer(Player selectedPlayer) {
+		this.selectedPlayer = selectedPlayer;
 	}
 }

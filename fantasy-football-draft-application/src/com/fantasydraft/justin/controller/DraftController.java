@@ -62,9 +62,11 @@ public class DraftController {
 	public String submitTeams(@ModelAttribute("draft") Draft draft) {
 		
 		draft.setDraftedPlayers(playerService.getDraftedPlayers());
+		draft.setAvailablePlayers(playerService.getAvailablePlayers());
 		
 		// for debugging
 		System.out.println(draft.getDraftedPlayers());
+		System.out.println(draft.getAvailablePlayers());
 		
 		return "draft-page";
 	}
@@ -74,28 +76,36 @@ public class DraftController {
 		
 		draft.setDraftedPlayers(playerService.getDraftedPlayers());
 	}
+	
+	@GetMapping("/setAvailablePlayers")
+	public void setAvailablePlayers(@ModelAttribute("draft") Draft draft) {
+		
+		draft.setAvailablePlayers(playerService.getAvailablePlayers());
+	}
 
 	@PostMapping("/assignPlayer")
 	public String assignPlayer(@ModelAttribute("draft") Draft draft) {
 		
-		// get player name from html/spring form
-		
-		
-		// find player in database
-		
-		
-		// assign currentTeam to fantasy_team field in database
-		
+		// fetch the current pick number from database
+		draft.setCurrentPick(playerService.getLatestPick() + 1);
 		
 		// assign currentPick to pick field in database
+		Integer pickUsed = draft.getCurrentPick();
 		
+		// assign currentTeam to fantasy_team field in database
+		String pickingTeam = draft.getDraftTeams().get(draft.getCurrentTeam());
 		
-		// clean up/close stuff?
+		// update player in database with fantasy team and pick number
+		playerService.assignPlayer(draft.getSelectedPlayerName(), pickingTeam, pickUsed);
 		
+		// update draftedPlayers and availablePlayers
+		// todo: update to not redo entire lists, just add drafted player and remove available player based on pick
+		draft.clearDraftedPlayers();
+		draft.setDraftedPlayers(playerService.getDraftedPlayers());
+		draft.clearAvailablePlayers();
+		draft.setAvailablePlayers(playerService.getAvailablePlayers());
 		
-		// increment pick before reloading
-		draft.incrementCurrentPick();
-		
+		// return draft page to update it
 		// replace this return with some javascript eventually
 		return "draft-page";
 	}

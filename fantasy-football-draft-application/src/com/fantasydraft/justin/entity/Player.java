@@ -26,7 +26,7 @@ public class Player {
 	private String fantasyTeam;
 	
 	@Column(name="pick")
-	private int pick;
+	private Integer pick;
 
 	public int getId() {
 		return id;
@@ -68,17 +68,16 @@ public class Player {
 		this.fantasyTeam = fantasyTeam;
 	}
 
-	public int getPick() {
+	public Integer getPick() {
 		return pick;
 	}
 
-	public void setPick(int pick) {
+	public void setPick(Integer pick) {
 		this.pick = pick;
 	}
 
 	@Override
 	public String toString() {
-		return "Player [playerName:" + playerName + ", position:" + position + ", nflTeam=" + nflTeam + ", fantasyTeam="
-				+ fantasyTeam + ", pick=" + pick + "]";
+		return playerName;
 	}
 }

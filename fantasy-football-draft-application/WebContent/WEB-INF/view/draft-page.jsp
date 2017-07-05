@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,5 +62,25 @@
     </c:forEach>
   </table>
   
+  <form:form action="assignPlayer" modelAttribute="draft">
+    <form:input path="selectedPlayerName" list="availablePlayersDatalist" value="Start Typing to Select Player"/>
+      <datalist id="availablePlayersDatalist">
+        <c:forEach var="availablePlayer" items="${draft.availablePlayers}">
+          <option value="${availablePlayer}" />
+        </c:forEach>
+      </datalist>
+    <br>
+    <input type="submit" value="Submit Pick" />
+  </form:form>
+  
 </body>
 </html>
+
+
+
+
+
+
+
+
+
