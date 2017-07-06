@@ -63,12 +63,9 @@
   </table>
   
   <form:form action="assignPlayer" modelAttribute="draft">
-    <form:input path="selectedPlayerName" list="availablePlayersDatalist" value="Start Typing to Select Player"/>
-      <datalist id="availablePlayersDatalist">
-        <c:forEach var="availablePlayer" items="${draft.availablePlayers}">
-          <option value="${availablePlayer}" />
-        </c:forEach>
-      </datalist>
+    <form:select size="5" path="selectedPlayerName">
+      <form:options items="${draft.availablePlayers}" />
+    </form:select>
     <br>
     <input type="submit" value="Submit Pick" />
   </form:form>
