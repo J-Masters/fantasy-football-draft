@@ -9,15 +9,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body>
-  <table>
+<body class="bottom-margin">
+<div>
+  <table class="draft-table">
     <tr>
 	  <c:forEach var="team" items="${draft.draftTeams}">
-	    <th>${team}</th>
+	    <th class="white"><div id="team-box">${team}</div></th>
 	  </c:forEach>
     </tr>
 
@@ -41,35 +43,45 @@
       <c:set var="pickUsed" value="${false}" />
       <c:forEach var="player" items="${draft.draftedPlayers}">
         <c:if test="${player.pick == currentPick}">
-          <td class="pickBox">
+          <td>
+          <div id="pick-box">
             <ul>
-              <li><c:out value="${player.pick}" /></li>
-              <li><c:out value="${player.playerName}" /></li>
-              <li><c:out value="${player.position}" /></li>
-              <li><c:out value="${player.nflTeam}" /></li>
+              <li class="white"><c:out value="${player.pick}" /></li>
+              <li class="white"><c:out value="${player.playerName}" /></li>
+              <li class="white"><c:out value="${player.position}" /></li>
+              <li class="white"><c:out value="${player.nflTeam}" /></li>
             </ul>
+          </div>
           </td>
           <c:set var="pickUsed" value="${true}" />
         </c:if>
       </c:forEach>
       <c:if test="${pickUsed == false}">
-        <td class="pickBox"><c:out value="${currentPick}" /></td>
+        <td class="white"><div id="pick-box"><c:out value="${currentPick}" /></div></td>
       </c:if> 
       
       </c:forEach>
       </tr>
-      <br>
     </c:forEach>
   </table>
   
-  <form:form action="assignPlayer" modelAttribute="draft">
-    <form:select size="5" path="selectedPlayerName">
-      <form:options items="${draft.availablePlayers}" />
-    </form:select>
-    <br>
-    <input type="submit" value="Submit Pick" />
-  </form:form>
+    <div class="container-fluid footer">
+      <div class="row">
+        <form:form action="assignPlayer" modelAttribute="draft">
+          <div class="col-md-3 col-md-offset-3">
+            <form:select size="10" class="selectpicker" path="selectedPlayerName">
+              <form:options items="${draft.availablePlayers}" />
+            </form:select>
+          </div>
+          <br>
+          <div class="col-md-1 col-md-offset-1">
+            <input type="submit" class="btn btn-primary" value="Submit Pick" />
+          </div>
+        </form:form>
+      </div>
+    </div>
   
+</div>
 </body>
 </html>
 
