@@ -14,74 +14,64 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body class="bottom-margin">
-<div>
-  <table class="draft-table">
-    <tr>
-	  <c:forEach var="team" items="${draft.draftTeams}">
-	    <th class="white"><div id="team-box">${team}</div></th>
-	  </c:forEach>
-    </tr>
+<body>
+<div class="container-fluid draft-content">
+  <div class="row row-centered">
+    <c:forEach var="team" items="${draft.draftTeams}">
+      <div id="team-box" class="white col-md-1 col-centered"><c:out value="${team}" /></div>
+    </c:forEach>
+  </div>
 
-    <!-- 16 is the standard number of rounds -->
-    <c:forEach var="round" begin="1" end="16">
-      <tr>
+  <!-- 16 is the standard number of rounds -->
+  <c:forEach var="round" begin="1" end="16">
+    <div class="row row-centered pick-row">
       <c:forEach var="pick" begin="1" end="${draft.numTeams}">
 
-      <c:choose>
-
-        <c:when test="${draft.draftType == 'Linear' || draft.draftType == 'Snake' && round % 2 == 1 || draft.draftType == 'Reverse Snake' && draft.fwdRounds.contains(round)}">
-          <c:set var="currentPick" value="${draft.numTeams * (round - 1) + pick}" />
-        </c:when>
-
-        <c:otherwise>
-          <c:set var="currentPick" value="${draft.numTeams * round + (numTeams - pick + 1)}" />
-        </c:otherwise>
-
-      </c:choose>
+        <c:choose>
+          <c:when test="${draft.draftType == 'Linear' || draft.draftType == 'Snake' && round % 2 == 1 || draft.draftType == 'Reverse Snake' && draft.fwdRounds.contains(round)}">
+            <c:set var="currentPick" value="${draft.numTeams * (round - 1) + pick}" />
+          </c:when>
+          <c:otherwise>
+            <c:set var="currentPick" value="${draft.numTeams * round + (numTeams - pick + 1)}" />
+          </c:otherwise>
+        </c:choose>
       
       <c:set var="pickUsed" value="${false}" />
       <c:forEach var="player" items="${draft.draftedPlayers}">
         <c:if test="${player.pick == currentPick}">
-          <td>
-          <div id="pick-box">
-            <ul>
-              <li class="white"><c:out value="${player.pick}" /></li>
-              <li class="white"><c:out value="${player.playerName}" /></li>
-              <li class="white"><c:out value="${player.position}" /></li>
-              <li class="white"><c:out value="${player.nflTeam}" /></li>
-            </ul>
+          <div id="pick-box" class="white col-md-1 col-centered">
+              <p id="pick-line"><c:out value="${player.pick}" /></p>
+              <p id="pick-line"><c:out value="${player.playerName}" /></p>
+              <p id="pick-line"><c:out value="${player.position}" /></p>
+              <p id="pick-line"><c:out value="${player.nflTeam}" /></p>
           </div>
-          </td>
           <c:set var="pickUsed" value="${true}" />
         </c:if>
       </c:forEach>
-      <c:if test="${pickUsed == false}">
-        <td class="white"><div id="pick-box"><c:out value="${currentPick}" /></div></td>
-      </c:if> 
       
+      <c:if test="${pickUsed == false}">
+        <div id="pick-box" class="white col-xs-1 col-centered"><c:out value="${currentPick}" /></div>
+      </c:if> 
       </c:forEach>
-      </tr>
-    </c:forEach>
-  </table>
-  
-    <div class="container-fluid footer">
-      <div class="row">
-        <form:form action="assignPlayer" modelAttribute="draft">
-          <div class="col-md-3 col-md-offset-3">
-            <form:select size="10" class="selectpicker" path="selectedPlayerName">
-              <form:options items="${draft.availablePlayers}" />
-            </form:select>
-          </div>
-          <br>
-          <div class="col-md-1 col-md-offset-1">
-            <input type="submit" class="btn btn-primary" value="Submit Pick" />
-          </div>
-        </form:form>
-      </div>
     </div>
-  
+  </c:forEach>
 </div>
+
+<div class="footer">
+  <div class="row">
+    <form:form action="assignPlayer" modelAttribute="draft">
+      <div class="col-md-3 col-md-offset-3">
+        <form:select size="10" class="selectpicker player-selection" path="selectedPlayerName">
+          <form:options items="${draft.availablePlayers}" />
+        </form:select>
+      </div>
+      <div class="col-md-2 col-md-offset-1">
+        <input type="submit" id="submit-pick-button" class="btn btn-primary" value="Submit Pick" />
+      </div>
+    </form:form>
+  </div>
+</div>
+ 
 </body>
 </html>
 

@@ -15,12 +15,12 @@
 </head>
 
 <body>
-<div class="text-center">
+<div class="container-fluid text-center">
   <h2>Fantasy Team Names</h2>
   <br>
   <form:form action="draft" modelAttribute="draft" method="POST">
 
-    <p>Enter teams in order of first round pick.</p>
+    <h3>Enter teams in order of first round pick.</h3>
     <br>
   
     <c:forEach items="${draft.draftTeams}" var="team" varStatus="i">

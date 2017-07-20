@@ -16,35 +16,32 @@
 </head>
 
 <body>
-  <div class="text-center">
+  <div class="container-fluid text-center">
     <h2>Draft Details</h2>
     <br>
-	<form:form action="startNewDraft" modelAttribute="draft">
+    <form:form action="startNewDraft" modelAttribute="draft">
 
-		<p>What type of draft?</p>
-		<div class="col-md-2 centered">
-		  <form:select class="selectpicker" path="draftType">
-		    <option selected disabled>Select Draft Type</option>
-			<form:options items="${draft.draftTypeOptions}" />
-		  </form:select>
-		</div>
+      <h3>What type of draft?</h3>
+      <div class="col-md-2 centered">
+        <form:select class="selectpicker" path="draftType">
+          <option selected disabled>Select Draft Type</option>
+          <form:options items="${draft.draftTypeOptions}" />
+        </form:select>
+      </div>
+      <br>
+      <br>
+      <br>
 		
-		<br>
-		<br>
-		<br>
+      <h3>How many teams will there be?</h3>
+      <div class="col-md-1 centered">
+        <form:input class="form-control" path="numTeams" />
+        <form:errors path="numTeams" />
+      </div>
+      <br>
+      <br>
 		
-		<p>How many teams will there be?</p>
-		<div class="col-md-1 centered">
-		  <form:input class="form-control" path="numTeams" />
-		</div>
-		<form:errors path="numTeams" />
-		
-		<br>
-		<br>
-		
-		<input type="submit" class="btn btn-primary double-font-size" value="Next" />
-
-	</form:form>
+      <input type="submit" class="btn btn-primary double-font-size" value="Next" />
+    </form:form>
   </div>
 </body>
 

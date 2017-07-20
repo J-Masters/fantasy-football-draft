@@ -33,7 +33,7 @@ public class PlayerDAOImpl implements PlayerDAO {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Query<Player> query = currentSession.createQuery("from Player where pick is null order by position", Player.class);
+		Query<Player> query = currentSession.createQuery("from Player where pick is null order by playerName", Player.class);
 		
 		List<Player> availablePlayers = query.getResultList();
 		
@@ -48,6 +48,10 @@ public class PlayerDAOImpl implements PlayerDAO {
 		Query<Integer> query = currentSession.createQuery("select max(p.pick) from Player p", Integer.class);
 		
 		Integer latestPick = query.uniqueResult();
+		
+		if (latestPick == null) {
+			latestPick = 0;
+		}
 		
 		return latestPick;
 	}

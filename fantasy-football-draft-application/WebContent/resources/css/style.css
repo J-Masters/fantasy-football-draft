@@ -25,11 +25,6 @@ h3 {
 
 p {
 	color: white;
-	font-size: 2em;
-}
-
-ul, li {
-	list-style-type: none;
 }
 
 #new-draft-button {
@@ -41,36 +36,29 @@ ul, li {
 	border-color: white;
 	border-style: solid;
 	border-radius: 5px;
-	margin: 8px;
 	text-align: center;
+	width: 120px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 #pick-box {
 	border-color: white;
 	border-style: solid;
 	border-radius: 5px;
-	margin: 8px;
 	text-align: center;
-}
-
-.footer {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	height: 100px;
-	width: 100%;
+	height: 120px;
+	width: 120px;
 	overflow: hidden;
-	background-color: #f5f5f5;
-	margin-top: 20px;
 }
 
-.centered {
-	float: none;
-	margin: 0 auto;
+#pick-line {
+	margin: 4px;
 }
 
-.vertical-align {
-	align-items: center;
+#submit-pick-button {
+	display: inline-block;
+	margin-top: 58px;
 }
 
 .double-font-size {
@@ -82,11 +70,39 @@ ul, li {
 	color: white;
 }
 
-.draft-table {
-	margin: 0px auto;
+
+.centered {
 	float: none;
-	list-style-type: none;
+	margin: 0 auto;
 }
+
+.row-centered {
+	text-align: center;
+}
+
+.col-centered {
+	display: inline-block;
+	float: none;
+}
+
+.draft-content {
+	margin-bottom: 150px;
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	height: 150px;
+	width: 100%;
+	background-color: #333333;
+}
+
+.player-selection {
+	width: 350px;
+	font-size: 1.25em;
+}
+
 
 
 
